@@ -1,0 +1,46 @@
+.bookings-page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 40px 24px 60px;
+}
+
+.loading-text {
+  color: #a0707a;
+}
+
+.empty-card {
+  text-align: center;
+  color: #a0707a;
+  padding: 40px;
+}
+
+.bookings-table-wrapper {
+  overflow-x: auto;
+}
+
+.bookings-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.bookings-table th {
+  text-align: left;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #a0707a;
+  text-transform: uppercase;
+  padding: 10px 14px;
+  border-bottom: 1px solid #f0dcd6;
+}
+
+.bookings-table td {
+  padding: 12px 14px;
+  color: #3a1a24;
+  font-size: 0.95rem;
+  border-bottom: 1px solid #f5e8e4;
+}
+
+.bookings-table tbody tr:hover {
+  background: #fdf0ec;
+}

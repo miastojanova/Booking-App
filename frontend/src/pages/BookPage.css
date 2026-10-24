@@ -1,0 +1,229 @@
+.book-page {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 40px 24px 60px;
+}
+
+.page-title {
+  font-family: 'Georgia', serif;
+  font-size: 2.4rem;
+  color: #3a1a24;
+  font-weight: 400;
+  margin-bottom: 6px;
+}
+
+.page-subtitle {
+  color: #7a5a64;
+  font-size: 1.05rem;
+  margin-bottom: 32px;
+}
+
+.card {
+  background: #fdf6f4;
+  border: 1px solid #f0dcd6;
+  border-radius: 16px;
+  padding: 28px 30px;
+  margin-bottom: 24px;
+}
+
+.card-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: #a0707a;
+  margin-bottom: 18px;
+  text-transform: uppercase;
+}
+
+.category-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.category-btn {
+  flex: 1;
+  min-width: 140px;
+  padding: 14px 24px;
+  border-radius: 28px;
+  border: 1.5px solid #d4a9a0;
+  background: #fff;
+  color: #5c2434;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.category-btn:hover {
+  background: #f5ddd8;
+}
+
+.category-btn.selected {
+  background: #9e5a6a;
+  color: #fff;
+  border-color: #9e5a6a;
+}
+
+.service-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.service-btn {
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: 1.5px solid #d4a9a0;
+  background: #fff;
+  color: #5c2434;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.service-btn:hover {
+  background: #f5ddd8;
+}
+
+.service-btn.selected {
+  background: #9e5a6a;
+  color: #fff;
+  border-color: #9e5a6a;
+}
+
+.date-input {
+  padding: 12px 18px;
+  border-radius: 28px;
+  border: 1.5px solid #d4a9a0;
+  background: #fff;
+  font-size: 1rem;
+  color: #3a1a24;
+  margin-bottom: 18px;
+  outline: none;
+  width: 240px;
+}
+
+.date-input:focus {
+  border-color: #9e5a6a;
+}
+
+.slot-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+}
+
+.no-slots {
+  grid-column: 1 / -1;
+  color: #a0707a;
+  font-style: italic;
+}
+
+.slot-btn {
+  padding: 10px 8px;
+  border-radius: 20px;
+  border: 1.5px solid #e8c8c0;
+  background: #fff;
+  color: #5c2434;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.slot-btn:hover {
+  background: #f5ddd8;
+}
+
+.slot-btn.selected {
+  background: #9e5a6a;
+  color: #fff;
+  border-color: #9e5a6a;
+}
+
+.details-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.text-input {
+  flex: 1;
+  padding: 14px 18px;
+  border-radius: 28px;
+  border: 1.5px solid #d4a9a0;
+  background: #fff;
+  font-size: 1rem;
+  color: #3a1a24;
+  outline: none;
+}
+
+.text-input:focus {
+  border-color: #9e5a6a;
+}
+
+.text-input::placeholder {
+  color: #bfa0a8;
+}
+
+.btn-primary {
+  padding: 16px 40px;
+  border-radius: 28px;
+  border: none;
+  background: #c4929a;
+  color: #fff;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #9e5a6a;
+}
+
+.btn-primary:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.btn-primary.full-width {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.error-text {
+  color: #c0392b;
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+}
+
+.success-message {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.success-message h1 {
+  font-family: 'Georgia', serif;
+  color: #3a1a24;
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+
+.success-message p {
+  color: #7a5a64;
+  margin-bottom: 28px;
+}
+
+@media (max-width: 600px) {
+  .slot-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .details-row {
+    flex-direction: column;
+  }
+
+  .category-buttons {
+    flex-direction: column;
+  }
+}

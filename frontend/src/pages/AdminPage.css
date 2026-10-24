@@ -1,0 +1,71 @@
+.admin-page {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 40px 24px 60px;
+}
+
+.admin-date-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.btn-secondary {
+  padding: 12px 28px;
+  border-radius: 28px;
+  border: 1.5px solid #d4a9a0;
+  background: #fff;
+  color: #5c2434;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #f5ddd8;
+}
+
+.btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.admin-field {
+  margin-bottom: 18px;
+}
+
+.admin-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #5c2434;
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+.admin-times {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.time-input {
+  padding: 12px 18px;
+  border-radius: 28px;
+  border: 1.5px solid #d4a9a0;
+  background: #fff;
+  font-size: 1rem;
+  color: #3a1a24;
+  outline: none;
+  width: 180px;
+}
+
+.time-input:focus {
+  border-color: #9e5a6a;
+}
+
+.admin-message {
+  margin-top: 14px;
+  color: #5c2434;
+  font-size: 0.95rem;
+}
