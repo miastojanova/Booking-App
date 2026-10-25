@@ -202,6 +202,7 @@ public class BookingServiceImpl implements BookingService {
                     .body(body)
                     .retrieve()
                     .body(JsonNode.class);
+            assert res != null;
             return res.at("/candidates/0/content/parts/0/text").asString();
         } catch (Exception e) {
             return "Thank you " + customer + "! Your " + service + " is booked for " + time + ".";
