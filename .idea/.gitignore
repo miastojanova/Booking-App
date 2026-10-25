@@ -15,3 +15,9 @@ target/
 .env
 applicattion.properties
 *.json
+*.env
+application-local.properties
+application-secrets.properties
+*.pem
+*-key.json
+credentials*.json

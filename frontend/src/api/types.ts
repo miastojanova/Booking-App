@@ -31,6 +31,7 @@ export interface Booking {
   clientName: string;
   startAt: string;
   endAt: string;
+  message?: string | null;
 }
 
 export interface WorkingHours {

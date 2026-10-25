@@ -12,13 +12,15 @@ public class BookingDTO {
     private String clientName;
     private LocalDateTime startAt;
     private LocalDateTime endAt;
+    private String message;
 
     public BookingDTO(Long id,
                       Long serviceId,
                       String serviceName,
                       String clientName,
                       LocalDateTime startAt,
-                      LocalDateTime endAt) {
+                      LocalDateTime endAt
+    ) {
         this.id = id;
         this.serviceId = serviceId;
         this.serviceName = serviceName;

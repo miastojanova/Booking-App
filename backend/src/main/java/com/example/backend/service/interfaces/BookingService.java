@@ -10,5 +10,5 @@ public interface BookingService {
     BookingDTO createBooking(CreateBookingDTO dto);
     List<BookingDTO> getAllBookings();
     void validateStartingTime(LocalDateTime startTime, LocalDateTime opening);
-
+    String messageForCustomer(String customer, String service, String time);
 }

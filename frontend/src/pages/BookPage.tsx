@@ -19,6 +19,7 @@ export default function BookPage() {
   const [fullName, setFullName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
@@ -71,7 +72,7 @@ export default function BookPage() {
       const dayStr = `${startDateTime.getFullYear()}-${String(startDateTime.getMonth() + 1).padStart(2, '0')}-${String(startDateTime.getDate()).padStart(2, '0')}`;
       const timeStr = `${String(startDateTime.getHours()).padStart(2, '0')}:${String(startDateTime.getMinutes()).padStart(2, '0')}:00`;
 
-      await createBooking({
+      const result = await createBooking({
         id: selectedService.id,
         day: dayStr,
         startTime: timeStr,
@@ -79,6 +80,7 @@ export default function BookPage() {
         email: email.trim(),
         phone: phone.trim(),
       });
+      setSuccessMessage(result.message || 'Your appointment has been booked successfully.');
       setSuccess(true);
       setSelectedSlot(null);
       setFullName('');
@@ -101,7 +103,7 @@ export default function BookPage() {
       <div className="book-page">
         <div className="success-message">
           <h1>Booking confirmed!</h1>
-          <p>Your appointment has been booked successfully.</p>
+          <p>{successMessage}</p>
           <button className="btn-primary" onClick={() => setSuccess(false)}>
             Book another
           </button>
@@ -119,7 +121,6 @@ export default function BookPage() {
       <h1 className="page-title">Book your visit</h1>
       <p className="page-subtitle">Pick a service, a day and a time that suits you.</p>
 
-      {/* 1 · SERVICE */}
       <div className="card">
         <div className="card-label">1 · SERVICE</div>
         <div className="category-buttons">
@@ -148,7 +149,6 @@ export default function BookPage() {
         )}
       </div>
 
-      {/* 2 · DATE & TIME */}
       <div className="card">
         <div className="card-label">2 · DATE &amp; TIME</div>
         <input
@@ -176,7 +176,6 @@ export default function BookPage() {
         )}
       </div>
 
-      {/* 3 · YOUR DETAILS */}
       <div className="card">
         <div className="card-label">3 · YOUR DETAILS</div>
         <div className="details-row">

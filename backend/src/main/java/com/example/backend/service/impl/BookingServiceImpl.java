@@ -15,15 +15,21 @@ import com.example.backend.service.interfaces.WorkingHoursService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.client.RestClient;
 import org.springframework.web.server.ResponseStatusException;
+import tools.jackson.databind.JsonNode;
 
 import java.sql.SQLException;
 import java.time.Clock;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,7 +41,11 @@ public class BookingServiceImpl implements BookingService {
     private final BookingRepository bookingRepository;
     private final WorkingHoursService workingHoursService;
     private final Clock clock;
-    private final int stepMinutes;
+    //private final int stepMinutes;
+    private final RestClient rest = RestClient.create();
+
+    @Value("${gemini.api-key}") private String apiKey;
+    @Value("${gemini.model}")   private String model;
 
     public BookingServiceImpl(SalonServiceRepository serviceRepository,
                               ClientRepository clientRepository,
@@ -55,7 +65,7 @@ public class BookingServiceImpl implements BookingService {
         this.bookingRepository = bookingRepository;
         this.workingHoursService = workingHoursService;
         this.clock = clock;
-        this.stepMinutes = stepMinutes;
+       // this.stepMinutes = stepMinutes;
     }
 
 
@@ -128,7 +138,7 @@ public class BookingServiceImpl implements BookingService {
         try {
             Booking saved = bookingRepository.saveAndFlush(booking);
 
-            return new BookingDTO(
+            BookingDTO newDto = new BookingDTO(
                     saved.getId(),
                     service.getId(),
                     service.getName(),
@@ -136,6 +146,14 @@ public class BookingServiceImpl implements BookingService {
                     saved.getStartAt(),
                     saved.getEndAt()
             );
+            newDto.setMessage(messageForCustomer(
+                    newDto.getClientName(),
+                    newDto.getServiceName(),
+                    startAt.format(DateTimeFormatter.ofPattern("EEEE, d MMMM 'at' HH:mm", Locale.ENGLISH))
+            ));
+
+            return newDto;
+
         } catch (DataIntegrityViolationException exception) {
             if (isExclusionViolation(exception)) {
                 throw new BookingConflictException(
@@ -165,6 +183,29 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public void validateStartingTime(LocalDateTime startTime, LocalDateTime opening) {
 
+    }
+
+    @Override
+    public String messageForCustomer(String customer, String service, String time) {
+        String prompt = "Write a warm, short (max 2 sentences) booking confirmation " +
+                "for a beauty salon. Customer: " + customer + ", service: " + service +
+                ", time: " + time + ". No emojis, no placeholders.";
+
+        Map<String, Object> body = Map.of("contents",
+                List.of(Map.of("parts", List.of(Map.of("text", prompt)))));
+
+        try {
+            JsonNode res = rest.post()
+                    .uri("https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent")
+                    .header("x-goog-api-key", apiKey)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(body)
+                    .retrieve()
+                    .body(JsonNode.class);
+            return res.at("/candidates/0/content/parts/0/text").asString();
+        } catch (Exception e) {
+            return "Thank you " + customer + "! Your " + service + " is booked for " + time + ".";
+        }
     }
 
     private ResponseStatusException badRequest(String message) {
